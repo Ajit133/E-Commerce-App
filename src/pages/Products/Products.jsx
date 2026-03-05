@@ -3,6 +3,7 @@ import "./Products.scss";
 import List from '../../components/List/List';
 import { useParams } from 'react-router-dom';
 import { categories } from '../../data';
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 
 const Products = () => {
    let catId = parseInt(useParams().id);
@@ -45,6 +46,7 @@ const Products = () => {
                    
                </div>
                <div className='right'>
+               <Breadcrumb items={[{ label: category.name }]} />
                <img
           className="catImg"
           src={category.banner}

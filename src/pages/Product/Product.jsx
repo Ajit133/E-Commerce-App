@@ -8,7 +8,8 @@ import { CartContext } from '../../context/CartContext';
 import { WishlistContext } from '../../context/WishlistContext';
 import { ToastContext } from '../../context/ToastContext';
 import { useParams } from 'react-router-dom';
-import { products } from '../../data';
+import { products, categories } from '../../data';
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 
 const Product = () => {
 
@@ -40,8 +41,16 @@ const Product = () => {
             addToast(`"${item.title}" added to wish list!`, 'wishlist');
         }
     };
+    const cat = categories[item.catId];
     return (
-        <div className="product">
+        <>
+          <div className="productBreadcrumb">
+            <Breadcrumb items={[
+              { label: cat?.name, to: `/products/${item.catId}` },
+              { label: item.title },
+            ]} />
+          </div>
+          <div className="product">
           <div className="left">
             <div className="images">
             <img src={images[0]} alt='' onClick={e=>setSelectedImg(0)} />
@@ -93,6 +102,7 @@ const Product = () => {
             </div>
             </div>
           </div>
+        </>
       )}
 
 export default Product;

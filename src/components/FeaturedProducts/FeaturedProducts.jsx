@@ -1,56 +1,35 @@
 import React from 'react';
 import "./FeaturedProducts.scss";
 import Card from '../Card/Card';
+import { products } from '../../data';
 
-const FeaturedProducts = ({type}) => {
-    const data = [
-        {
-            id : 1,
-            img : "https://images.pexels.com/photos/1972115/pexels-photo-1972115.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            img2 : "https://images.pexels.com/photos/1163194/pexels-photo-1163194.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            title :"Long Sleeve T-Shirt",
-            isNew :true,
-            oldPrice  : 19,
-            price : 12,
-        },{
-            id : 2,
-            img : "https://images.pexels.com/photos/1759622/pexels-photo-1759622.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            title : "Coat",
-            isNew : true,
-            oldPrice : 17,
-            price : 13,
-        },{
-            id  : 3,
-            img : "https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            title : "Skirt",
-            oldPrice : 20,
-            price : 18,
-        },{
-            id : 4,
-            img : "https://images.pexels.com/photos/2065200/pexels-photo-2065200.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            title : "Hat",
-            oldPrice : 23,
-            price : 19,
-        }
-    ]
+const FeaturedProducts = ({ type }) => {
+    let data;
+    let title;
+    let desc;
+
+    if (type === 'new') {
+        data = products.filter(p => p.isNew);
+        title = 'New Arrivals';
+        desc = 'Fresh styles, just landed. Be the first to wear our newest pieces across Women, Men, and Children collections.';
+    } else {
+        data = [...products].sort((a, b) => b.price - a.price).slice(0, 4);
+        title = 'Trending Now';
+        desc = "Our most-loved styles right now. Discover what's hot this season and update your wardrobe with the finest picks.";
+    }
+
     return (
         <div className="featuredProducts">
-      <div className="top">
-        <h1>{type} products</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
-          suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
-          lacus vel facilisis labore et dolore magna aliqua. Quis ipsum
-          suspendisse ultrices gravida. Risus commodo viverra maecenas.
-        </p>
-      </div>
-      <div className="bottom">
-      {data.map(item=>(
-            <Card item={item} key={item.id} />
-               ))}
-      </div>
-    </div>
+            <div className="top">
+                <h1>{title}</h1>
+                <p>{desc}</p>
+            </div>
+            <div className="bottom">
+                {data.map(item => (
+                    <Card item={item} key={item.id} />
+                ))}
+            </div>
+        </div>
     );
 };
 
