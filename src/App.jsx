@@ -11,6 +11,9 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Checkout from './pages/Checkout/Checkout';
 import Toast from './components/Toast/Toast';
+import About from './pages/About/About';
+import ContactPage from './pages/ContactPage/ContactPage';
+import Stores from './pages/Stores/Stores';
 
 const Layout = ()=>{
   return(
@@ -43,6 +46,18 @@ const router = createBrowserRouter([
       {
         path:"/checkout",
         element:<Checkout />
+      },
+      {
+        path:"/about",
+        element:<About />
+      },
+      {
+        path:"/contact",
+        element:<ContactPage />
+      },
+      {
+        path:"/stores",
+        element:<Stores />
       }
     ]
   },

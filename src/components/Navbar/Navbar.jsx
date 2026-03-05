@@ -70,14 +70,6 @@ const Navbar = () => {
       <div className="wrapper">
         <div className="left">
           <div className="item">
-            <img src="/images/en.png" alt="" />
-            <KeyboardArrowDownIcon />
-          </div>
-          <div className="item">
-            <span>USD</span>
-            <KeyboardArrowDownIcon />
-          </div>
-          <div className="item">
             <Link className="link" to="/products/1">Women</Link>
           </div>
           <div className="item">
@@ -92,9 +84,9 @@ const Navbar = () => {
         </div>
         <div className="right">
           <div className="item"><Link className="link" to="/">Homepage</Link></div>
-          <div className="item"><Link className="link" to="/">About</Link></div>
-          <div className="item"><Link className="link" to="/">Contact</Link></div>
-          <div className="item"><Link className="link" to="/">Stores</Link></div>
+          <div className="item"><Link className="link" to="/about">About</Link></div>
+          <div className="item"><Link className="link" to="/contact">Contact</Link></div>
+          <div className="item"><Link className="link" to="/stores">Stores</Link></div>
           <IconBar />
         </div>
         <div className="hamburger" onClick={() => setMobileOpen((p) => !p)}>
@@ -108,9 +100,9 @@ const Navbar = () => {
           <Link className="link mobileLink" to="/products/2" onClick={() => setMobileOpen(false)}>Men</Link>
           <Link className="link mobileLink" to="/products/3" onClick={() => setMobileOpen(false)}>Children</Link>
           <Link className="link mobileLink" to="/" onClick={() => setMobileOpen(false)}>Homepage</Link>
-          <Link className="link mobileLink" to="/" onClick={() => setMobileOpen(false)}>About</Link>
-          <Link className="link mobileLink" to="/" onClick={() => setMobileOpen(false)}>Contact</Link>
-          <Link className="link mobileLink" to="/" onClick={() => setMobileOpen(false)}>Stores</Link>
+          <Link className="link mobileLink" to="/about" onClick={() => setMobileOpen(false)}>About</Link>
+          <Link className="link mobileLink" to="/contact" onClick={() => setMobileOpen(false)}>Contact</Link>
+          <Link className="link mobileLink" to="/stores" onClick={() => setMobileOpen(false)}>Stores</Link>
           <IconBar mobile />
         </div>
       )}
