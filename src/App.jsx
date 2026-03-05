@@ -9,6 +9,7 @@ import Product from './pages/Product/Product';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
+import Checkout from './pages/Checkout/Checkout';
 
 const Layout = ()=>{
   return(
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path:"/product/:id",
         element:<Product />
+      },
+      {
+        path:"/checkout",
+        element:<Checkout />
       }
     ]
   },

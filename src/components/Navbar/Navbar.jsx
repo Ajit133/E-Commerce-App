@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
@@ -7,9 +7,12 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Cart from "../Cart/Cart";
+import { CartContext } from "../../context/CartContext";
 
 const Navbar = () => {
-  const [open,setOpen] = useState(false)
+  const [open,setOpen] = useState(false);
+  const { products } = useContext(CartContext);
+  const cartCount = products.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -70,12 +73,12 @@ const Navbar = () => {
             <FavoriteBorderOutlinedIcon />
             <div className="cartIcon" onClick={()=>setOpen(!open)}>
               <ShoppingCartOutlinedIcon />
-              <span>0</span>
+              <span>{cartCount}</span>
             </div>
           </div>
         </div>
       </div>
-      {open && <Cart />}
+      {open && <Cart setOpen={setOpen} />}
     </div>
   );
 };

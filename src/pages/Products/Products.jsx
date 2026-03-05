@@ -2,29 +2,26 @@ import React, { useState } from 'react';
 import "./Products.scss";
 import List from '../../components/List/List';
 import { useParams } from 'react-router-dom';
+import { categories } from '../../data';
 
 const Products = () => {
    let catId = parseInt(useParams().id);
    const [maxPrice,setMaxPrice] = useState(1000);
    const [sort,setSort] = useState(null);
+
+   const category = categories[catId] || { name: "Products", banner: "https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600", subCategories: [] };
    
     return (
         <div className='products'>
                <div className='left'>
                    <div className='filterItem'>
-                       <h2>Product Categories</h2>
-                       <div className='inputItem'>
-                          <input type='checkbox' id='1' value={1} />
-                          <label htmlFor='1'>Shoes</label>
-                       </div>
-                       <div className='inputItem'>
-                          <input type='checkbox' id='2' value={2} />
-                          <label htmlFor='2'>Skirts</label>
-                       </div>
-                       <div className='inputItem'>
-                          <input type='checkbox' id='3' value={3} />
-                          <label htmlFor='3'>Shoes</label>
-                       </div>
+                       <h2>{category.name} Categories</h2>
+                       {category.subCategories.map((sub, i) => (
+                           <div className='inputItem' key={i}>
+                               <input type='checkbox' id={`sub-${i}`} value={sub} />
+                               <label htmlFor={`sub-${i}`}>{sub}</label>
+                           </div>
+                       ))}
                    </div>
                    <div className='filterItem'>
                        <h2>Filter By Price</h2>
@@ -50,8 +47,8 @@ const Products = () => {
                <div className='right'>
                <img
           className="catImg"
-          src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          alt=""
+          src={category.banner}
+          alt={category.name}
         />
              <List catId={catId} maxPrice={maxPrice} sort={sort} />
                </div>

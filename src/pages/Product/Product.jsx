@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "./Product.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
+import { CartContext } from '../../context/CartContext';
+import { useParams } from 'react-router-dom';
+import { products } from '../../data';
 
 const Product = () => {
 
+    const { id } = useParams();
+    const item = products.find((p) => p.id === parseInt(id));
+
     const[selectedImg,setSelectedImg] = useState(0);
     const [quantity,setQuantity] = useState(1);
-    const images = [
-        "https://images.pexels.com/photos/10026491/pexels-photo-10026491.png?auto=compress&cs=tinysrgb&w=1600",
-        "https://images.pexels.com/photos/12179283/pexels-photo-12179283.jpeg?auto=compress&cs=tinysrgb&w=1600"
-    ]
+    const { dispatch } = useContext(CartContext);
+
+    if (!item) return <div style={{ padding: '40px' }}>Product not found.</div>;
+
+    const images = [item.img, item.img2].filter(Boolean);
+
+    const product = {
+        id: item.id,
+        img: item.img,
+        title: item.title,
+        desc: item.desc,
+        price: item.price,
+        quantity,
+    };
     return (
         <div className="product">
           <div className="left">
@@ -24,15 +40,15 @@ const Product = () => {
             </div>
           </div>
           <div className="right">
-            <h1>Title</h1>
-            <span className='price'>$199</span>
-            <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a</p>
+            <h1>{item.title}</h1>
+            <span className='price'>${item.price}</span>
+            <p>{item.desc}</p>
             <div className='quantity'>
                  <button onClick={()=>setQuantity((prev)=>(prev === 1? 1 : prev -1))}>-</button>
                  {quantity}
                  <button onClick={()=>setQuantity((prev)=>prev + 1)}>+</button>
             </div>
-            <button className='add'>
+            <button className='add' onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}>
                 <AddShoppingCartIcon/>ADD TO CART
             </button>
             <div className='links'>
