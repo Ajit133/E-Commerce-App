@@ -9,3 +9,12 @@
         text-decoration: none;
     }
 }
+
+body.dark {
+    background-color: #0d1117;
+    color: #f0f6fc;
+
+    .link {
+        color: #f0f6fc;
+    }
+}

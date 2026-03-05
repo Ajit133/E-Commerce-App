@@ -1,0 +1,39 @@
+.toastContainer {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+
+  .toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 220px;
+    max-width: 320px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    animation: toastSlideIn 0.3s ease-out;
+
+    svg {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    &.cart     { background-color: #2879fe; }
+    &.wishlist { background-color: #e53935; }
+    &.success  { background-color: #2e7d32; }
+    &.info     { background-color: #555;    }
+  }
+}
+
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}

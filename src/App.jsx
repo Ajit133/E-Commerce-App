@@ -10,6 +10,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Checkout from './pages/Checkout/Checkout';
+import Toast from './components/Toast/Toast';
 
 const Layout = ()=>{
   return(
@@ -17,6 +18,7 @@ const Layout = ()=>{
         <Navbar/>
         <Outlet/>
         <Footer />
+        <Toast />
     </div>
   )
 }

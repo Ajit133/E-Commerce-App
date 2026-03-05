@@ -9,6 +9,11 @@
   background-color: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 
+  body.dark & {
+    background-color: #161b22;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+
   .searchBox {
     display: flex;
     align-items: center;
@@ -16,10 +21,9 @@
     border-bottom: 1px solid #eee;
     gap: 10px;
 
-    .searchIcon {
-      color: #aaa;
-      flex-shrink: 0;
-    }
+    body.dark & { border-color: #30363d; }
+
+    .searchIcon { color: #aaa; flex-shrink: 0; }
 
     input {
       flex: 1;
@@ -27,20 +31,20 @@
       outline: none;
       font-size: 16px;
       color: #333;
+      background: transparent;
 
-      &::placeholder {
-        color: #aaa;
-      }
+      body.dark & { color: #f0f6fc; }
+
+      &::placeholder { color: #aaa; }
     }
 
     .closeIcon {
       color: #aaa;
       cursor: pointer;
       flex-shrink: 0;
+      &:hover { color: #333; }
 
-      &:hover {
-        color: #333;
-      }
+      body.dark &:hover { color: #f0f6fc; }
     }
   }
 
@@ -56,9 +60,9 @@
       cursor: pointer;
       transition: background-color 0.15s;
 
-      &:hover {
-        background-color: #f5f5f5;
-      }
+      &:hover { background-color: #f5f5f5; }
+
+      body.dark &:hover { background-color: #21262d; }
 
       img {
         width: 48px;
@@ -76,12 +80,10 @@
           font-size: 15px;
           font-weight: 500;
           color: #333;
-        }
 
-        .resultPrice {
-          font-size: 13px;
-          color: #2879fe;
+          body.dark & { color: #f0f6fc; }
         }
+        .resultPrice { font-size: 13px; color: #2879fe; }
       }
     }
   }
@@ -91,5 +93,7 @@
     color: gray;
     font-size: 14px;
     text-align: center;
+
+    body.dark & { color: #8b949e; }
   }
 }

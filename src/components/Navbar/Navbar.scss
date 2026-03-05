@@ -1,41 +1,57 @@
-.navbar{
-    height: 80px;
-    .wrapper{
+.navbar {
+    min-height: 80px;
+
+    body.dark & {
+        background-color: #161b22;
+        color: #f0f6fc;
+        border-bottom: 1px solid #30363d;
+    }
+
+    .wrapper {
         padding: 10px 30px;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        .item{
+        .item {
             display: flex;
             align-items: center;
             font-size: 18px;
         }
-        .left{
+        .left {
             display: flex;
             align-items: center;
             gap: 25px;
         }
-        .center{
+        .center {
             font-size: 30px;
             letter-spacing: 2px;
         }
-        .right{
+        .right {
             display: flex;
             align-items: center;
             gap: 25px;
 
-            .icons{
+            .icons {
                 display: flex;
                 gap: 15px;
                 color: #777;
                 cursor: pointer;
+
+                body.dark & { color: #8b949e; }
             }
-            .wishlistIcon{
+
+            .themeToggle {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+
+            .wishlistIcon {
                 position: relative;
                 cursor: pointer;
 
-                span{
+                span {
                     font-size: 12px;
                     width: 20px;
                     height: 20px;
@@ -50,10 +66,11 @@
                     justify-content: center;
                 }
             }
-            .cartIcon{
+
+            .cartIcon {
                 position: relative;
 
-                span{
+                span {
                     font-size: 12px;
                     width: 20px;
                     height: 20px;
@@ -68,6 +85,112 @@
                     justify-content: center;
                 }
             }
+        }
+    }
+
+    // ---- Hamburger (mobile only) ----
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        color: #555;
+
+        body.dark & { color: #f0f6fc; }
+
+        @media (max-width: 768px) {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    // ---- Mobile menu ----
+    .mobileMenu {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 24px 24px;
+        gap: 0;
+        background-color: white;
+        border-top: 1px solid #eee;
+
+        body.dark & {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        .mobileLink {
+            font-size: 17px;
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+
+            body.dark & {
+                color: #f0f6fc;
+                border-color: #21262d;
+            }
+        }
+
+        .mobileIcons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding-top: 16px;
+            color: #777;
+            cursor: pointer;
+
+            body.dark & { color: #8b949e; }
+
+            .themeToggle {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+
+            .wishlistIcon {
+                position: relative;
+                cursor: pointer;
+
+                span {
+                    font-size: 12px;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: red;
+                    color: white;
+                    position: absolute;
+                    right: -10px;
+                    top: -10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+            .cartIcon {
+                position: relative;
+
+                span {
+                    font-size: 12px;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: #2879fe;
+                    color: white;
+                    position: absolute;
+                    right: -10px;
+                    top: -10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    // ---- Hide desktop nav on mobile ----
+    @media (max-width: 768px) {
+        .wrapper .left,
+        .wrapper .right {
+            display: none;
         }
     }
 }
