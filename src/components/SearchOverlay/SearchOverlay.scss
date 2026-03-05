@@ -1,0 +1,95 @@
+.searchOverlay {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;
+  max-width: calc(100vw - 40px);
+  z-index: 999;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+
+  .searchBox {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    gap: 10px;
+
+    .searchIcon {
+      color: #aaa;
+      flex-shrink: 0;
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: #333;
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+
+    .closeIcon {
+      color: #aaa;
+      cursor: pointer;
+      flex-shrink: 0;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  .searchResults {
+    max-height: 360px;
+    overflow-y: auto;
+
+    .resultItem {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background-color 0.15s;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+
+      img {
+        width: 48px;
+        height: 56px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .resultInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .resultTitle {
+          font-size: 15px;
+          font-weight: 500;
+          color: #333;
+        }
+
+        .resultPrice {
+          font-size: 13px;
+          color: #2879fe;
+        }
+      }
+    }
+  }
+
+  .noResults {
+    padding: 16px;
+    color: gray;
+    font-size: 14px;
+    text-align: center;
+  }
+}

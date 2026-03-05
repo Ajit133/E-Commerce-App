@@ -2,8 +2,10 @@ import React, { useState, useContext } from 'react';
 import "./Product.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import BalanceIcon from "@mui/icons-material/Balance";
 import { CartContext } from '../../context/CartContext';
+import { WishlistContext } from '../../context/WishlistContext';
 import { useParams } from 'react-router-dom';
 import { products } from '../../data';
 
@@ -15,6 +17,8 @@ const Product = () => {
     const[selectedImg,setSelectedImg] = useState(0);
     const [quantity,setQuantity] = useState(1);
     const { dispatch } = useContext(CartContext);
+    const { items: wishlistItems, dispatch: wishlistDispatch } = useContext(WishlistContext);
+    const isWishlisted = item ? wishlistItems.some((w) => w.id === item.id) : false;
 
     if (!item) return <div style={{ padding: '40px' }}>Product not found.</div>;
 
@@ -52,8 +56,19 @@ const Product = () => {
                 <AddShoppingCartIcon/>ADD TO CART
             </button>
             <div className='links'>
-                <div className='item'>
-               <FavoriteBorderIcon/> ADD TO WISH LIST
+                <div
+                  className='item'
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    isWishlisted
+                      ? wishlistDispatch({ type: 'REMOVE_FROM_WISHLIST', payload: item.id })
+                      : wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: { id: item.id, img: item.img, title: item.title, price: item.price } })
+                  }
+                >
+                  {isWishlisted
+                    ? <FavoriteIcon style={{ color: 'red' }} />
+                    : <FavoriteBorderIcon />}
+                  {isWishlisted ? 'WISHLISTED' : 'ADD TO WISH LIST'}
                 </div>
                 <div className='item'>
                  <BalanceIcon /> ADD TO COMPARE

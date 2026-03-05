@@ -3,16 +3,34 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Cart from "../Cart/Cart";
+import Wishlist from "../Wishlist/Wishlist";
+import SearchOverlay from "../SearchOverlay/SearchOverlay";
 import { CartContext } from "../../context/CartContext";
+import { WishlistContext } from "../../context/WishlistContext";
 
 const Navbar = () => {
-  const [open,setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { products } = useContext(CartContext);
+  const { items: wishlistItems } = useContext(WishlistContext);
   const cartCount = products.reduce((acc, item) => acc + item.quantity, 0);
+  const wishlistCount = wishlistItems.length;
+
+  const closeAll = () => {
+    setCartOpen(false);
+    setWishlistOpen(false);
+    setSearchOpen(false);
+  };
+
+  // keep open state variable name compatible with Cart
+  const open = cartOpen;
+  const setOpen = setCartOpen;
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -68,16 +86,42 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="icons">
-            <SearchIcon />
+            <SearchIcon
+              onClick={() => {
+                closeAll();
+                setSearchOpen((prev) => !prev);
+              }}
+            />
             <PersonOutlineOutlinedIcon />
-            <FavoriteBorderOutlinedIcon />
-            <div className="cartIcon" onClick={()=>setOpen(!open)}>
+            <div
+              className="wishlistIcon"
+              onClick={() => {
+                closeAll();
+                setWishlistOpen((prev) => !prev);
+              }}
+            >
+              {wishlistCount > 0 ? (
+                <FavoriteIcon style={{ color: "red" }} />
+              ) : (
+                <FavoriteBorderOutlinedIcon />
+              )}
+              {wishlistCount > 0 && <span>{wishlistCount}</span>}
+            </div>
+            <div
+              className="cartIcon"
+              onClick={() => {
+                closeAll();
+                setCartOpen((prev) => !prev);
+              }}
+            >
               <ShoppingCartOutlinedIcon />
               <span>{cartCount}</span>
             </div>
           </div>
         </div>
       </div>
+      {searchOpen && <SearchOverlay onClose={() => setSearchOpen(false)} />}
+      {wishlistOpen && <Wishlist setOpen={setWishlistOpen} />}
       {open && <Cart setOpen={setOpen} />}
     </div>
   );
